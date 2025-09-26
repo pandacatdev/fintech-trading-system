@@ -1,7 +1,5 @@
 package com.aquariux.fintech.trading.service;
 
-import com.aquariux.fintech.trading.client.BinancePriceClient;
-import com.aquariux.fintech.trading.client.HuobiPriceClient;
 import com.aquariux.fintech.trading.client.dto.BinanceTickerDto;
 import com.aquariux.fintech.trading.client.dto.HuobiResponseDto;
 import com.aquariux.fintech.trading.config.TradingProperties;
@@ -21,8 +19,8 @@ import org.springframework.stereotype.Service;
 public class PriceAggregationService {
   private final TradingProperties tradingProperties;
 
-  private final BinancePriceClient binanceClient;
-  private final HuobiPriceClient huobiClient;
+  private final BinancePriceService binancePriceService;
+  private final HuobiPriceService huobiPriceService;
   private final BestPriceService bestPriceService;
 
   @Scheduled(fixedRate = 10_000)
@@ -30,10 +28,10 @@ public class PriceAggregationService {
     try {
       // fetch all prices for supported trading pairs
       CompletableFuture<Map<String, BinanceTickerDto>> binanceFuture =
-          CompletableFuture.supplyAsync(() -> binanceClient.fetchPrices(tradingProperties.getPairs()));
+          CompletableFuture.supplyAsync(() -> binancePriceService.fetchPrices(tradingProperties.getPairs()));
 
       CompletableFuture<Map<String, HuobiResponseDto.HuobiTickerDto>> huobiFuture =
-          CompletableFuture.supplyAsync(() -> huobiClient.fetchPrices(tradingProperties.getPairs()));
+          CompletableFuture.supplyAsync(() -> huobiPriceService.fetchPrices(tradingProperties.getPairs()));
 
       Map<String, BinanceTickerDto> binanceMap = binanceFuture
           .exceptionally(ex -> Map.of())

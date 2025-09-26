@@ -16,3 +16,15 @@ trading:
   pairs:
     - BTCUSDT
     - ETHUSDT
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 3000
+        loggerLevel: basic
+  retryer:
+    period: 500
+    maxPeriod: 1000
+    maxAttempts: 2
