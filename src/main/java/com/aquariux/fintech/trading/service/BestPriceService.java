@@ -6,6 +6,8 @@ import com.aquariux.fintech.trading.entity.BestPrice;
 import com.aquariux.fintech.trading.entity.Exchange;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,13 @@ public class BestPriceService {
     bestPrice.setBestAskSource(bestAskSource);
 
     return bestPriceRepository.save(bestPrice);
+  }
+
+  public Optional<BestPrice> getBestPrice(Asset base, Asset quote) {
+    return bestPriceRepository.findByBaseAssetAndQuoteAsset(base, quote);
+  }
+
+  public List<BestPrice> getAllBestPrices() {
+    return bestPriceRepository.findAll();
   }
 }
