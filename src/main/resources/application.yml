@@ -11,3 +11,8 @@ logging:
   level:
     root: INFO
     org.springframework: INFO
+
+trading:
+  pairs:
+    - BTCUSDT
+    - ETHUSDT
