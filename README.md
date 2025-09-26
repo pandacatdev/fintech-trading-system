@@ -90,9 +90,26 @@ curl -X POST http://localhost:8080/api/trades \
 curl -s http://localhost:8080/api/trades | jq
 ```
 
+## End-to-End Testing
+
+Due to time constraints, a bash script (`test-e2e.sh`) is made for end-to-end testing instead of full JUnit test coverage. 
+
+This script:
+- Starts the Spring Boot app
+- Waits for data to be loaded
+- Calls key API endpoints (wallet, prices, trades, history)
+- Prints and asserts responses for quick validation
+
+Run it with:
+```
+bash test-e2e.sh
+```
+
+It provides a fast, practical demonstration of the main flows.
+
 ## Future Improvements
 
 - Add Spring Security + JWT for real user handling.
-- Support more trading pairs dynamically.
+- Support more trading pairs.
 - Use async trade execution with message queue.
-- Improve error handling (@RestControllerAdvice).
+- Implement JUnit test coverage.
