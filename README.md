@@ -21,10 +21,10 @@ It periodically fetches prices from Binance and Huobi, stores the best aggregate
 
 ## Data Model
 
-- **User** → Demo user only.
-- **WalletBalance** → Tracks balance per asset.
-- **BestPrice** → Latest aggregated bid/ask per trading pair.
-- **Trade** → Immutable record of executed trade.
+- **User**: Demo user only.
+- **WalletBalance**: Tracks balance per asset.
+- **BestPrice**: Latest aggregated bid/ask per trading pair.
+- **Trade**: Immutable record of executed trade.
 
 ## How to Run
 ### Prerequisites
