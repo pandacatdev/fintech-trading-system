@@ -12,6 +12,7 @@ import com.aquariux.fintech.trading.repository.BestPriceRepository;
 import com.aquariux.fintech.trading.repository.TradeRepository;
 import com.aquariux.fintech.trading.repository.WalletBalanceRepository;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -86,6 +87,19 @@ public class TradeService {
         .quoteAmount(quoteAmount)
         .executedAt(trade.getExecutedAt())
         .build();
+  }
+
+  public List<TradeResponse> getTradeHistory(UUID userId) {
+    return tradeRepository.findByUserIdOrderByExecutedAtDesc(userId).stream()
+        .map(trade -> TradeResponse.builder()
+            .symbol(trade.getBaseAsset().name() + trade.getQuoteAsset().name())
+            .side(trade.getSide())
+            .price(trade.getPrice())
+            .quantity(trade.getQuantity())
+            .quoteAmount(trade.getQuoteAmount())
+            .executedAt(trade.getExecutedAt())
+            .build())
+        .toList();
   }
 
 }

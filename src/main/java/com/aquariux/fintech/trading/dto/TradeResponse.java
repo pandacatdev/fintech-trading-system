@@ -11,9 +11,14 @@ import java.time.Instant;
 @Builder
 public class TradeResponse {
   private String symbol;
+
   private TradeSide side;
+
   private BigDecimal price; // best price at execution time
+
   private BigDecimal quantity;
+
   private BigDecimal quoteAmount; // total price = price * quantity
+
   private Instant executedAt;
 }
