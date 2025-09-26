@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:trade_db;MODE=MySQL;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update # Dev/test only. In prod use Flyway/Liquibase and set to 'none'
+    properties:
+      hibernate.jdbc.time_zone: UTC
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always # Always initialize the database for dev/test. In prod set to 'never'.
+      data-locations: classpath:db/data.sql
+      platform: h2
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

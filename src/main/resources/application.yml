@@ -1,0 +1,13 @@
+spring.application.name: trading
+
+spring.profiles.active: dev
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
